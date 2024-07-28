@@ -10,6 +10,7 @@ module.exports = {
             json.result.push({
                 id: alunos[i].id,
                 nome: alunos[i].nome,
+                idade: alunos[i].idade,
                 cpf: alunos[i].cpf
             });
         }
@@ -33,13 +34,15 @@ module.exports = {
         let json = {error: '', result:[]};
 
         let nome = req.body.nome;
+        let idade = req.body.idade;
         let cpf = req.body.cpf;
 
-        if(nome && cpf) {
-            let AlunoId = await AlunoService.adicionarAluno(nome, cpf);
+        if(nome && idade && cpf) {
+            let AlunoId = await AlunoService.adicionarAluno(nome, idade, cpf);
             json.result = {
                 id: AlunoId,
                 nome,
+                idade,
                 cpf
             }
         }else{
@@ -54,13 +57,15 @@ module.exports = {
 
         let id = req.params.id;
         let nome = req.body.nome;
+        let idade = req.body.idade;
         let cpf = req.body.cpf;
 
-        if(id && nome && cpf) {
-            await AlunoService.alterarAluno(id, nome, cpf);
+        if(id && nome && idade && cpf) {
+            await AlunoService.alterarAluno(id, nome, idade, cpf);
             json.result = {
                 id,
                 nome,
+                idade,
                 cpf
             }
         }else{
