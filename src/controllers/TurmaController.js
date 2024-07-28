@@ -59,4 +59,38 @@ module.exports = {
             throw error;
         }
     },
+
+    alterarTurma: async (req, res) => {
+        try {
+            let json = { error: '', result: [] };
+
+            let id = req.params.id;
+            let nome = req.body.nome;
+            let descricao = req.body.descricao;
+
+            if (id && nome && descricao) {
+                await TurmaService.alterarTurma(id, nome, descricao);
+                json.result = {
+                    id,
+                    nome,
+                    descricao
+                }
+            } else {
+                json.error = 'Informações não enviadas'
+            }
+            res.json(json);
+        } catch (error) {
+            throw error;
+        }
+    },
+
+    excluirTurma: async (req, res) => {
+        try {
+            let json = { error: '', result: [] };
+            await TurmaService.excluirTurma(req.params.id);
+            res.json(json);
+        } catch (error) {
+            throw error;
+        }
+    }
 }
