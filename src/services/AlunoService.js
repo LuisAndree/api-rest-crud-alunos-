@@ -73,13 +73,18 @@ module.exports = {
         }
     },
 
-    excluirAluno: (id)=> {
-        return new Promise((aceito, rejeitado)=> {
-            db.query('DELETE FROM alunos WHERE id = ?', [id], (error, results)=>{
-                if(error) {rejeitado(error); return; }
-                aceito(results);
+    excluirAluno: async (id)=> {
+        try {
+            const results = new Promise((aceito, rejeitado)=> {
+                db.query('DELETE FROM alunos WHERE id = ?', [id], (error, results)=>{
+                    if(error) {rejeitado(error); return; }
+                    aceito(results);
+                });
             });
-        });
+            return results;
+        } catch(error) {
+            throw error;
+        }     
     },
 
 };
