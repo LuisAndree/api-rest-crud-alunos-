@@ -15,6 +15,8 @@ router.delete('/aluno/:id', AlunoController.excluirAluno);
 router.get('/turmas', TurmaController.listarTurmas);
 router.get('/turma/:id', TurmaController.exibirTurma);
 router.post('/turma', TurmaController.adicionarTurma);
+router.put('/turma/:id', TurmaController.alterarTurma);
+router.delete('/turma/:id', TurmaController.excluirTurma);
 
 
 module.exports = router;
